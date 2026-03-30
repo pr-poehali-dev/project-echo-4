@@ -478,12 +478,22 @@ const Index = () => {
 
       {/* Sticky Mobile CTA */}
       <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden p-3 bg-[#0B0F12]/90 backdrop-blur border-t border-white/10">
-        <a href="tel:89028887891" className="block w-full">
-          <Button className="w-full bg-orange-500 hover:bg-orange-600 text-white rounded-xl py-4 text-base font-semibold flex items-center justify-center gap-2">
-            <Phone className="w-5 h-5" />
-            Позвонить — 8-902-888-78-91
-          </Button>
-        </a>
+        <div className="flex gap-2">
+          <a href="tel:89028887891" className="flex-1">
+            <Button className="w-full bg-orange-500 hover:bg-orange-600 text-white rounded-xl py-4 text-base font-semibold flex items-center justify-center gap-2">
+              <Phone className="w-5 h-5" />
+              Позвонить
+            </Button>
+          </a>
+          <a href="https://t.me/hertoletik66" target="_blank" rel="noopener noreferrer" className="flex-1">
+            <Button className="w-full bg-[#229ED9] hover:bg-[#1a8bbf] text-white rounded-xl py-4 text-base font-semibold flex items-center justify-center gap-2">
+              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 14.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.496.969z"/>
+              </svg>
+              Telegram
+            </Button>
+          </a>
+        </div>
       </div>
 
       {/* Footer */}
