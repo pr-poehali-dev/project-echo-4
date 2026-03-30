@@ -20,6 +20,19 @@ const Index = () => {
     setOpenFaq(openFaq === index ? null : index)
   }
 
+  const scrollTo = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
+    setMenuOpen(false)
+  }
+
+  const navLinks: { label: string; id: string }[] = [
+    { label: "О пеллетах", id: "about" },
+    { label: "Преимущества", id: "features" },
+    { label: "Как купить", id: "how-to-buy" },
+    { label: "Вопросы", id: "faq" },
+    { label: "Контакты", id: "contacts" },
+  ]
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setFormStatus("loading")
@@ -87,14 +100,14 @@ const Index = () => {
 
           {/* Desktop Navigation Links */}
           <div className="hidden md:flex items-center gap-1">
-            {["О пеллетах", "Преимущества", "Как купить", "Вопросы", "Контакты"].map((item) => (
-              <a
-                key={item}
-                href="#"
+            {navLinks.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => scrollTo(item.id)}
                 className="px-4 py-2 bg-black/40 ring-1 ring-white/20 backdrop-blur rounded-full hover:bg-black/50 transition-colors text-sm"
               >
-                {item}
-              </a>
+                {item.label}
+              </button>
             ))}
           </div>
 
@@ -106,7 +119,7 @@ const Index = () => {
             >
               8-902-888-78-91
             </a>
-            <Button className="bg-white text-black hover:bg-white/90 rounded-full px-6 text-sm">Получить предложение</Button>
+            <Button onClick={() => scrollTo("contacts")} className="bg-white text-black hover:bg-white/90 rounded-full px-6 text-sm">Получить предложение</Button>
           </div>
 
           {/* Mobile: phone + burger */}
@@ -130,17 +143,16 @@ const Index = () => {
         {/* Mobile Menu Dropdown */}
         {menuOpen && (
           <div className="relative z-10 mx-4 mb-2 md:hidden rounded-2xl bg-black/80 ring-1 ring-white/20 backdrop-blur p-4 flex flex-col gap-2">
-            {["О пеллетах", "Преимущества", "Как купить", "Вопросы", "Контакты"].map((item) => (
-              <a
-                key={item}
-                href="#"
-                onClick={() => setMenuOpen(false)}
-                className="px-4 py-3 rounded-xl hover:bg-white/10 transition-colors text-sm font-medium"
+            {navLinks.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => scrollTo(item.id)}
+                className="px-4 py-3 rounded-xl hover:bg-white/10 transition-colors text-sm font-medium text-left"
               >
-                {item}
-              </a>
+                {item.label}
+              </button>
             ))}
-            <Button className="mt-2 bg-white text-black hover:bg-white/90 rounded-xl w-full">
+            <Button onClick={() => scrollTo("contacts")} className="mt-2 bg-white text-black hover:bg-white/90 rounded-xl w-full">
               Получить предложение
             </Button>
           </div>
@@ -165,10 +177,11 @@ const Index = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-3 md:gap-4 mb-10 md:mb-16 w-full max-w-sm sm:max-w-none sm:w-auto">
-            <Button size="lg" className="bg-white text-black hover:bg-white/90 rounded-full px-8 py-4 text-base md:text-lg w-full sm:w-auto">
+            <Button onClick={() => scrollTo("contacts")} size="lg" className="bg-white text-black hover:bg-white/90 rounded-full px-8 py-4 text-base md:text-lg w-full sm:w-auto">
               Получить предложение
             </Button>
             <Button
+              onClick={() => scrollTo("about")}
               size="lg"
               variant="outline"
               className="bg-black/40 ring-1 ring-white/20 backdrop-blur border-0 text-white hover:bg-black/50 rounded-full px-8 py-4 text-base md:text-lg w-full sm:w-auto"
@@ -186,7 +199,7 @@ const Index = () => {
       </div>
 
       {/* Features Section */}
-      <section className="relative z-10 py-12 md:py-24 px-4 md:px-6">
+      <section id="features" className="relative z-10 py-12 md:py-24 px-4 md:px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-8">
             <div className="rounded-2xl bg-black/20 ring-1 ring-white/15 backdrop-blur p-5 md:p-8 text-center">
@@ -225,7 +238,7 @@ const Index = () => {
       </section>
 
       {/* Gallery Section */}
-      <section className="relative z-10 py-12 md:py-24 px-4 md:px-6">
+      <section id="about" className="relative z-10 py-12 md:py-24 px-4 md:px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-8 md:mb-12">
             <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-3 md:mb-4">Наше производство</h2>
@@ -279,7 +292,7 @@ const Index = () => {
       </section>
 
       {/* How to Buy Section */}
-      <section className="relative z-10 py-12 md:py-24 px-4 md:px-6">
+      <section id="how-to-buy" className="relative z-10 py-12 md:py-24 px-4 md:px-6">
         <div className="max-w-7xl mx-auto">
           <div className="rounded-2xl md:rounded-3xl bg-white/5 ring-1 ring-white/10 backdrop-blur p-6 md:p-12">
             <div className="text-center mb-10 md:mb-16">
@@ -317,6 +330,7 @@ const Index = () => {
 
             <div className="text-center">
               <Button
+                onClick={() => scrollTo("contacts")}
                 size="lg"
                 className="bg-white text-black hover:bg-white/90 rounded-full px-8 md:px-12 py-4 text-base md:text-lg font-semibold w-full sm:w-auto"
               >
@@ -328,7 +342,7 @@ const Index = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="relative z-10 py-12 md:py-24 px-4 md:px-6">
+      <section id="faq" className="relative z-10 py-12 md:py-24 px-4 md:px-6">
         <div className="max-w-7xl mx-auto">
           <div className="rounded-2xl md:rounded-3xl bg-white/5 ring-1 ring-white/10 backdrop-blur p-6 md:p-12">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-start">
@@ -372,7 +386,7 @@ const Index = () => {
       </section>
 
       {/* Contact Section */}
-      <section className="relative z-10 py-12 md:py-24 px-4 md:px-6">
+      <section id="contacts" className="relative z-10 py-12 md:py-24 px-4 md:px-6">
         <div className="max-w-7xl mx-auto">
           <div className="rounded-2xl md:rounded-3xl bg-black/20 ring-1 ring-white/15 backdrop-blur p-6 md:p-12">
             <div className="text-center mb-8 md:mb-16">
@@ -514,9 +528,14 @@ const Index = () => {
               <div>
                 <h3 className="text-xs font-bold uppercase tracking-wider mb-4 md:mb-6">ПРОДУКЦИЯ</h3>
                 <ul className="space-y-2 md:space-y-3">
-                  {["О пеллетах", "Ассортимент", "Цены", "Доставка"].map((item) => (
-                    <li key={item}>
-                      <a href="#" className="text-white/70 hover:text-white transition-colors text-sm leading-relaxed">{item}</a>
+                  {[
+                    { label: "О пеллетах", id: "about" },
+                    { label: "Ассортимент", id: "about" },
+                    { label: "Цены", id: "contacts" },
+                    { label: "Доставка", id: "how-to-buy" },
+                  ].map((item) => (
+                    <li key={item.label}>
+                      <button onClick={() => scrollTo(item.id)} className="text-white/70 hover:text-white transition-colors text-sm leading-relaxed">{item.label}</button>
                     </li>
                   ))}
                 </ul>
@@ -525,9 +544,14 @@ const Index = () => {
               <div>
                 <h3 className="text-xs font-bold uppercase tracking-wider mb-4 md:mb-6">КОМПАНИЯ</h3>
                 <ul className="space-y-2 md:space-y-3">
-                  {["О компании", "Качество", "Контакты", "Вопросы и ответы"].map((item) => (
-                    <li key={item}>
-                      <a href="#" className="text-white/70 hover:text-white transition-colors text-sm leading-relaxed">{item}</a>
+                  {[
+                    { label: "О компании", id: "about" },
+                    { label: "Качество", id: "features" },
+                    { label: "Контакты", id: "contacts" },
+                    { label: "Вопросы и ответы", id: "faq" },
+                  ].map((item) => (
+                    <li key={item.label}>
+                      <button onClick={() => scrollTo(item.id)} className="text-white/70 hover:text-white transition-colors text-sm leading-relaxed">{item.label}</button>
                     </li>
                   ))}
                 </ul>
