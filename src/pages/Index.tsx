@@ -70,7 +70,7 @@ const Index = () => {
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: "url(https://cdn.poehali.dev/projects/3813c157-611e-45da-aee0-cf85d544db54/files/56787fcc-2736-4e75-8be2-e301978f7724.jpg)",
+            backgroundImage: "url(https://cdn.poehali.dev/projects/3813c157-611e-45da-aee0-cf85d544db54/bucket/8e321b95-6014-4256-afbb-dd5577b4e686.jpg)",
           }}
         >
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/85" />
@@ -186,6 +186,53 @@ const Index = () => {
               </div>
               <h3 className="text-xl font-semibold mb-4">Быстрая доставка</h3>
               <p className="text-white/80 leading-relaxed">Постоянные запасы на складе, доставка по всей России в удобные сроки.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Gallery Section */}
+      <section className="relative z-10 py-24 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Наше производство</h2>
+            <p className="text-xl text-white/80">Собственный завод, современное оборудование, контроль качества на каждом этапе</p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="md:col-span-2 md:row-span-2 rounded-2xl overflow-hidden h-64 md:h-auto">
+              <img
+                src="https://cdn.poehali.dev/projects/3813c157-611e-45da-aee0-cf85d544db54/bucket/8e321b95-6014-4256-afbb-dd5577b4e686.jpg"
+                alt="Производство пеллет"
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+            <div className="rounded-2xl overflow-hidden h-48">
+              <img
+                src="https://cdn.poehali.dev/projects/3813c157-611e-45da-aee0-cf85d544db54/bucket/fbd67a00-db39-46db-bce5-a78c82f28389.jpg"
+                alt="Склад пеллет"
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+            <div className="rounded-2xl overflow-hidden h-48">
+              <img
+                src="https://cdn.poehali.dev/projects/3813c157-611e-45da-aee0-cf85d544db54/bucket/986b3b20-3b04-4a73-9afd-e9ea58a8e738.jpg"
+                alt="Оборудование"
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+            <div className="rounded-2xl overflow-hidden h-48">
+              <img
+                src="https://cdn.poehali.dev/projects/3813c157-611e-45da-aee0-cf85d544db54/bucket/a2297ad5-aaf5-433e-a496-7addeb90f6c2.jpg"
+                alt="Пеллеты крупным планом"
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+            <div className="rounded-2xl overflow-hidden h-48">
+              <img
+                src="https://cdn.poehali.dev/projects/3813c157-611e-45da-aee0-cf85d544db54/bucket/b3824584-eef3-42ad-bdd2-b444cd2f310f.jpg"
+                alt="Пеллеты с листком"
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
             </div>
           </div>
         </div>
