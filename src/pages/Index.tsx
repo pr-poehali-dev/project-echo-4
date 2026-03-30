@@ -393,6 +393,21 @@ const Index = () => {
             <p className="text-base md:text-xl text-white/80">Нам доверяют частные дома, котельные и предприятия по всей России</p>
           </div>
 
+          {/* Stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10 md:mb-14">
+            {[
+              { value: "500+", label: "клиентов" },
+              { value: "7 лет", label: "на рынке" },
+              { value: "15 000+", label: "тонн поставлено" },
+              { value: "98%", label: "довольных клиентов" },
+            ].map((stat, i) => (
+              <div key={i} className="rounded-2xl bg-white/5 ring-1 ring-white/10 backdrop-blur p-5 md:p-6 text-center">
+                <div className="text-3xl md:text-4xl font-bold text-orange-400 mb-1">{stat.value}</div>
+                <div className="text-white/70 text-sm md:text-base">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
             {[
               {
