@@ -385,6 +385,55 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Reviews Section */}
+      <section className="relative z-10 py-12 md:py-24 px-4 md:px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-8 md:mb-12">
+            <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-3 md:mb-4">Отзывы клиентов</h2>
+            <p className="text-base md:text-xl text-white/80">Нам доверяют частные дома, котельные и предприятия по всей России</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+            {[
+              {
+                name: "Александр Петров",
+                location: "Екатеринбург",
+                text: "Заказываем пеллеты уже третий сезон. Качество стабильное, котёл работает без нареканий. Летом взяли сразу 20 тонн по хорошей цене — сэкономили прилично.",
+                stars: 5,
+                role: "Частный дом, 280 м²",
+              },
+              {
+                name: "Марина Соколова",
+                location: "Тюмень",
+                text: "Обратилась по рекомендации соседей. Менеджер всё подробно объяснил, помог подобрать нужную фракцию. Доставка точно в срок, пеллеты упакованы хорошо. Рекомендую!",
+                stars: 5,
+                role: "Таунхаус, 180 м²",
+              },
+              {
+                name: "ООО «ТеплоСервис»",
+                location: "Пермь",
+                text: "Сотрудничаем с ЛАГУНА уже два года. Стабильные поставки для наших котельных, гибкие условия оплаты, всегда на связи. Надёжный партнёр для бизнеса.",
+                stars: 5,
+                role: "Промышленная котельная",
+              },
+            ].map((review, i) => (
+              <div key={i} className="rounded-2xl bg-white/5 ring-1 ring-white/10 backdrop-blur p-6 md:p-8 flex flex-col gap-4">
+                <div className="flex gap-1">
+                  {Array.from({ length: review.stars }).map((_, s) => (
+                    <span key={s} className="text-orange-400 text-lg">★</span>
+                  ))}
+                </div>
+                <p className="text-white/85 leading-relaxed text-sm md:text-base flex-1">"{review.text}"</p>
+                <div className="border-t border-white/10 pt-4">
+                  <div className="font-semibold text-sm md:text-base">{review.name}</div>
+                  <div className="text-white/60 text-xs md:text-sm">{review.role} · {review.location}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Contact Section */}
       <section id="contacts" className="relative z-10 py-12 md:py-24 px-4 md:px-6">
         <div className="max-w-7xl mx-auto">
