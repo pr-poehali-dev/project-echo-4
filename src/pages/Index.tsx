@@ -397,8 +397,8 @@ const Index = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10 md:mb-14">
             {[
               { value: "500+", label: "клиентов" },
-              { value: "7 лет", label: "на рынке" },
-              { value: "15 000+", label: "тонн поставлено" },
+              { value: "9 лет", label: "на рынке" },
+              { value: "100 000+", label: "тонн поставлено" },
               { value: "98%", label: "довольных клиентов" },
             ].map((stat, i) => (
               <div key={i} className="rounded-2xl bg-white/5 ring-1 ring-white/10 backdrop-blur p-5 md:p-6 text-center">
