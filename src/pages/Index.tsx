@@ -3,6 +3,8 @@ import Icon from "@/components/ui/icon"
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
 
+const CONTACT_URL = "https://functions.poehali.dev/d65b5a4d-1a58-4531-a7aa-9dbdceda502c"
+
 interface FAQ {
   question: string
   answer: string
@@ -10,9 +12,31 @@ interface FAQ {
 
 const Index = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null)
+  const [formData, setFormData] = useState({ name: "", phone: "", message: "" })
+  const [formStatus, setFormStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
 
   const toggleFaq = (index: number) => {
     setOpenFaq(openFaq === index ? null : index)
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setFormStatus("loading")
+    try {
+      const res = await fetch(CONTACT_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      })
+      if (res.ok) {
+        setFormStatus("success")
+        setFormData({ name: "", phone: "", message: "" })
+      } else {
+        setFormStatus("error")
+      }
+    } catch {
+      setFormStatus("error")
+    }
   }
 
   const faqs: FAQ[] = [
@@ -284,44 +308,73 @@ const Index = () => {
               {/* Left Column - Contact Form */}
               <div className="rounded-2xl bg-white/95 text-black p-8 shadow-2xl">
                 <h3 className="text-2xl font-bold mb-6">Отправить запрос</h3>
-                <form className="space-y-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium mb-2">
-                      Имя
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-                      placeholder="Ваше имя"
-                    />
+                {formStatus === "success" ? (
+                  <div className="text-center py-10">
+                    <div className="text-4xl mb-4">✅</div>
+                    <h4 className="text-xl font-bold mb-2">Заявка отправлена!</h4>
+                    <p className="text-gray-600">Менеджер свяжется с вами в ближайшее время.</p>
+                    <Button
+                      className="mt-6 bg-black text-white hover:bg-gray-800 rounded-lg"
+                      onClick={() => setFormStatus("idle")}
+                    >
+                      Отправить ещё
+                    </Button>
                   </div>
-                  <div>
-                    <label htmlFor="phone" className="block text-sm font-medium mb-2">
-                      Телефон
-                    </label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-                      placeholder="+7 (___) ___-__-__"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium mb-2">
-                      Сообщение
-                    </label>
-                    <textarea
-                      id="message"
-                      rows={5}
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent resize-none"
-                      placeholder="Расскажите об объёме и условиях..."
-                    />
-                  </div>
-                  <Button className="w-full bg-black text-white hover:bg-gray-800 rounded-lg py-3 font-normal text-base">
-                    Отправить сообщение
-                  </Button>
-                </form>
+                ) : (
+                  <form className="space-y-6" onSubmit={handleSubmit}>
+                    <div>
+                      <label htmlFor="name" className="block text-sm font-medium mb-2">
+                        Имя
+                      </label>
+                      <input
+                        type="text"
+                        id="name"
+                        required
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                        placeholder="Ваше имя"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="phone" className="block text-sm font-medium mb-2">
+                        Телефон
+                      </label>
+                      <input
+                        type="tel"
+                        id="phone"
+                        required
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                        placeholder="+7 (___) ___-__-__"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="message" className="block text-sm font-medium mb-2">
+                        Сообщение
+                      </label>
+                      <textarea
+                        id="message"
+                        rows={5}
+                        value={formData.message}
+                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent resize-none"
+                        placeholder="Расскажите об объёме и условиях..."
+                      />
+                    </div>
+                    {formStatus === "error" && (
+                      <p className="text-red-500 text-sm">Ошибка отправки. Попробуйте ещё раз или позвоните нам.</p>
+                    )}
+                    <Button
+                      type="submit"
+                      disabled={formStatus === "loading"}
+                      className="w-full bg-black text-white hover:bg-gray-800 rounded-lg py-3 font-normal text-base"
+                    >
+                      {formStatus === "loading" ? "Отправляем..." : "Отправить сообщение"}
+                    </Button>
+                  </form>
+                )}
               </div>
 
               {/* Right Column - Contact Info */}
