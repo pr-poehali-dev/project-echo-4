@@ -405,10 +405,12 @@ const Index = () => {
                     <Mail className="w-5 h-5" />
                     <span className="font-medium">gogivna@mail.ru</span>
                   </a>
-                  <Button className="w-full bg-black text-white hover:bg-gray-800 rounded-lg flex items-center justify-center gap-2 mt-2">
-                    <Phone className="w-4 h-4" />
-                    Позвонить
-                  </Button>
+                  <a href="tel:89028887891" className="block w-full mt-2">
+                    <Button className="w-full bg-black text-white hover:bg-gray-800 rounded-lg flex items-center justify-center gap-2">
+                      <Phone className="w-4 h-4" />
+                      Позвонить
+                    </Button>
+                  </a>
                 </div>
               </div>
             </div>
